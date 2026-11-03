@@ -55,7 +55,7 @@ function renderSavings() {
     return p && isOnSale(p) ? sum + (p.compareAtPrice - p.price) * qty : sum;
   }, 0);
   const banner = $('savings');
-  banner.hidden = state.cart.length === 0 || Boolean(state.order);
+  banner.hidden = saved <= 0 || Boolean(state.order);
   banner.textContent = `You're saving ${money(saved)} with sale prices`;
 }
 
