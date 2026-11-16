@@ -26,7 +26,7 @@ window.Pricing = (() => {
       } else {
         couponStatus = 'applied';
         for (const line of lines) {
-          if (line.product.onSale) continue;
+          if (Number(line.product.compareAtPrice) > line.product.price) continue;
           discount += line.lineTotal * rate;
         }
       }
