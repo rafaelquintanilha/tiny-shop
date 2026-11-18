@@ -37,9 +37,13 @@ window.Pricing = (() => {
     }
     discount = round2(discount);
 
-    const afterDiscount = round2(subtotal - discount);
-    const shipping = lines.length === 0 || afterDiscount >= FREE_SHIPPING_MIN ? 0 : SHIPPING_FEE;
-    const total = round2(afterDiscount + shipping);
+    // Free shipping is decided on the subtotal before any coupon, so applying a
+    // coupon never takes free shipping away.
+    const freeShipping = lines.length === 0 || subtotal >= FREE_SHIPPING_MIN;
+    const shipping = freeShipping ? 0 : SHIPPING_FEE;
+    // How much more the customer must add to the cart to ship free (0 once they qualify).
+    const freeShippingGap = freeShipping ? 0 : round2(FREE_SHIPPING_MIN - subtotal);
+    const total = round2(subtotal - discount + shipping);
 
     return {
       lines: lines.map(({ product, ...l }) => l),
@@ -48,6 +52,7 @@ window.Pricing = (() => {
       couponStatus,
       discount,
       shipping,
+      freeShippingGap,
       total,
     };
   }
