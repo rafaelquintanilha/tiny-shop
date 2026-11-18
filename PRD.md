@@ -5,7 +5,7 @@
 3. Coupon code SAVE10 takes 10% off the price of every eligible item in the cart.
 4. Items on sale are not eligible for coupons. A coupon never reduces the price of a sale item.
 5. An unknown coupon code shows "Invalid code" and leaves the total unchanged.
-6. Shipping costs $5.00. Orders of $50.00 or more ship free. The $50.00 threshold is checked after the coupon discount.
+6. Shipping costs $5.00. Orders of $50.00 or more ship free. The $50.00 threshold is checked on the subtotal, before the coupon discount, so a coupon never takes away free shipping. While the subtotal is under $50.00, the cart shows "Add $X more for free shipping" under the total, where X is $50.00 minus the subtotal.
 7. Total = subtotal − coupon discount + shipping.
 8. Checkout places the order and shows a confirmation with an order number and the total charged.
 9. The total charged on the confirmation equals the total shown in the cart just before checkout.

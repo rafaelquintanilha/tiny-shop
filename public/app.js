@@ -136,6 +136,7 @@ function renderCart() {
       <tr><td>Shipping</td><td data-testid="shipping">${q.shipping === 0 ? 'Free' : money(q.shipping)}</td></tr>
       <tr class="total"><td>Total</td><td data-testid="total">${money(q.total)}</td></tr>
     </table>
+    ${q.freeShippingGap > 0 ? `<p class="shipping-hint" data-testid="free-shipping-hint">Add ${money(q.freeShippingGap)} more for free shipping</p>` : ''}
 
     <button type="button" class="checkout" id="checkout">Checkout</button>`;
 }

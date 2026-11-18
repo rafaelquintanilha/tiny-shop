@@ -116,6 +116,7 @@ button.link { background: none; border: none; color: var(--ink); padding: 0; tex
 .totals td { padding: 5px 0; }
 .totals td:last-child { text-align: right; }
 .totals tr.total td { font-weight: 600; font-size: 16px; border-top: 1px dashed var(--line); padding-top: 10px; }
+.shipping-hint { margin: -8px 0 16px; color: var(--ink-soft); font-size: 13px; text-align: right; }
 .checkout { width: 100%; padding: 12px; border-radius: 12px; font-weight: 600; }
 .confirmation { display: flex; flex-direction: column; gap: 10px; padding: 6px 0 14px; font-family: var(--font-mono); font-size: 14px; }
 .confirmation strong { font-family: var(--font-ui); font-size: 17px; letter-spacing: -0.01em; }
