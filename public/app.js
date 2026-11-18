@@ -37,7 +37,7 @@ const money = (n) => `$${Number(n).toFixed(2)}`;
 
 // ----- product list -----
 
-const isOnSale = (p) => Number(p.compareAtPrice) > p.price;
+const { isOnSale } = Pricing;
 
 function renderProducts() {
   $('products').innerHTML = CATALOG.map((p) => `
