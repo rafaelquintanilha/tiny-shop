@@ -5,6 +5,10 @@ window.Pricing = (() => {
 
   const round2 = (n) => Math.round(n * 100) / 100;
 
+  // A product is on sale when its original price (compareAtPrice) is above its price.
+  // The storefront's "Sale" tag and coupon eligibility both use this one check.
+  const isOnSale = (p) => Number(p.compareAtPrice) > p.price;
+
   function quote(items, catalog, coupon = '') {
     const lines = [];
     for (const { id, qty } of items) {
@@ -26,7 +30,7 @@ window.Pricing = (() => {
       } else {
         couponStatus = 'applied';
         for (const line of lines) {
-          if (line.product.onSale) continue;
+          if (isOnSale(line.product)) continue;
           discount += line.lineTotal * rate;
         }
       }
@@ -48,5 +52,5 @@ window.Pricing = (() => {
     };
   }
 
-  return { quote, COUPONS, SHIPPING_FEE, FREE_SHIPPING_MIN };
+  return { quote, isOnSale, COUPONS, SHIPPING_FEE, FREE_SHIPPING_MIN };
 })();
