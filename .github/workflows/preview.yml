@@ -36,11 +36,16 @@ jobs:
           git push origin HEAD:gh-pages
       - name: Wait until the preview is live
         run: |
-          url="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.number }}/pricing.js"
-          want=$(sha256sum pr/public/pricing.js | cut -d' ' -f1)
+          base="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.number }}"
           for i in $(seq 1 60); do
-            got=$(curl -fsSL "$url?$(date +%s)" | sha256sum | cut -d' ' -f1 || true)
-            [ "$got" = "$want" ] && echo "live: ${url%pricing.js}" && exit 0
+            ok=1
+            for f in pr/public/*; do
+              name=$(basename "$f")
+              want=$(sha256sum "$f" | cut -d' ' -f1)
+              got=$(curl -fsSL "$base/$name?$(date +%s)" | sha256sum | cut -d' ' -f1 || true)
+              [ "$got" = "$want" ] || { ok=0; break; }
+            done
+            [ $ok = 1 ] && echo "live: $base/" && exit 0
             sleep 5
           done
           echo "preview did not go live in time" && exit 1
