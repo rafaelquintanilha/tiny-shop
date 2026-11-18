@@ -122,7 +122,7 @@ function renderCart() {
     <form class="coupon" id="coupon-form">
       <label class="sr-only" for="coupon-input">Coupon code</label>
       <input id="coupon-input" name="coupon" placeholder="Coupon code" autocomplete="off" value="${escapeAttr(state.couponError ? state.couponError.typed : (q.coupon || ''))}">
-      <button type="submit" class="secondary">Apply</button>
+      <button type="submit" class="secondary">Redeem</button>
     </form>
     <p class="coupon-msg ${state.couponError ? 'error' : 'ok'}" data-testid="coupon-msg">${
       state.couponError
